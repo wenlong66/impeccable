@@ -38,39 +38,9 @@
       "start impeccable live so I can explore bolder or more delightful variants."
     ],
     "brandColor": "#E2AE38",
-    "composerIcon": "./assets/icon.png",
-    "logo": "./assets/icon.png",
+    "composerIcon": "./.agents/assets/icon.png",
+    "logo": "./.agents/assets/icon.png",
     "screenshots": []
   },
-  "hooks": {
-    "hooks": {
-      "PostToolUse": [
-        {
-          "matcher": "Edit|Write|apply_patch",
-          "hooks": [
-            {
-              "type": "command",
-              "command": "[ ! -f \"${PLUGIN_ROOT}/skills/impeccable/scripts/impeccable\" ] || \"${PLUGIN_ROOT}/skills/impeccable/scripts/impeccable\" hook",
-              "commandWindows": "cmd /c if exist \"${PLUGIN_ROOT}\\skills\\impeccable\\scripts\\impeccable.cmd\" \"${PLUGIN_ROOT}\\skills\\impeccable\\scripts\\impeccable.cmd\" hook",
-              "timeout": 5,
-              "statusMessage": "Checking UI changes"
-            }
-          ]
-        }
-      ],
-      "Stop": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "[ ! -f \"${PLUGIN_ROOT}/skills/impeccable/scripts/impeccable\" ] || \"${PLUGIN_ROOT}/skills/impeccable/scripts/impeccable\" hook",
-              "commandWindows": "cmd /c if exist \"${PLUGIN_ROOT}\\skills\\impeccable\\scripts\\impeccable.cmd\" \"${PLUGIN_ROOT}\\skills\\impeccable\\scripts\\impeccable.cmd\" hook",
-              "timeout": 30,
-              "statusMessage": "Design deep pass"
-            }
-          ]
-        }
-      ]
-    }
-  }
+  "hooks": "./.codex/hooks.json"
 }
