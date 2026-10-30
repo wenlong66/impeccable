@@ -96,7 +96,8 @@ The same rules that run natively run in a page, compiled to WebAssembly.
    generated files. `crates/live/src/browser_assets.rs` embeds the bundle with
    `include_str!` and the live server hands it to the browser as `/detect.js`,
    so the binary has to carry it. `antipatterns.json` is the registry
-   (`[{ id, name, category, description }]`) that a consumer working from a
+   (`[{ id, name, category, description }]`, plus `severity` on a row that
+   declares one, such as `"advisory"`) that a consumer working from a
    source checkout or a repo tarball reads without a Rust toolchain, since
    `extension/detector/` is gitignored; impeccable.style counts and renders
    the rules from it.
@@ -254,7 +255,10 @@ Two release kinds touch the runtime, in this order:
    pushes; `.github/workflows/release-engine.yml` builds the five targets and
    publishes the binaries with `.sha256` sidecars. The launcher, the npm shim
    and `impeccable install` download from
-   `github.com/pbakaus/impeccable/releases/download/engine-v<X>/`.
+   `github.com/pbakaus/impeccable/releases/download/engine-v<X>/` and verify
+   each binary against `skill/scripts/engine-checksums.txt`, never the
+   sidecar. After the release, `node scripts/check-engine-release.mjs --record`
+   rewrites that file; commit it with the `ENGINE_VERSION` bump.
 2. **npm platform packages**, then the **skill** and **CLI** releases, which
    `scripts/check-engine-release.mjs` gates on the engine release.
 
